@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 import "./sign-in-form.style.scss";
 import {
-  auth,
-  // signInWithGooglePopup,
   createUserDocumentFromAuth,
-  signInWithGoogleRedirect,
   signInAuthUserWithEmailAndPassword,
+  signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
-import { getRedirectResult } from "firebase/auth";
 
 const defaultFormField = {
   email: "",
@@ -29,24 +26,18 @@ const SignInForm = () => {
     setFormField(defaultFormField);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getRedirectResult(auth);
-      if (response) {
-        await createUserDocumentFromAuth(response.user);
-      }
-    };
-    fetchData();
-  }, []);
+  const signInWithGoogle = async () => {
+    await signInWithGooglePopup();
+    resetFormField()
+  }
 
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(response);
       resetFormField();
     } catch (err) {
       switch (err.code) {
@@ -90,7 +81,11 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button type='button' buttonType="google" onClick={signInWithGoogleRedirect}>
+          <Button
+            type="button"
+            buttonType="google"
+            onClick={signInWithGoogle}
+          >
             Sign in with Goolge
           </Button>
         </div>
