@@ -11,16 +11,18 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyDU3pc3kUVOk0srW6NhI_GLyoavQOHuiFQ",
   authDomain: "crown-cloth-db-43482.firebaseapp.com",
   projectId: "crown-cloth-db-43482",
   storageBucket: "crown-cloth-db-43482.appspot.com",
   messagingSenderId: "1083312464170",
-  appId: "1:1083312464170:web:0651a6619d3e3c0c63fe53",
+  appId: "1:1083312464170:web:0651a6619d3e3c0c63fe53"
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
