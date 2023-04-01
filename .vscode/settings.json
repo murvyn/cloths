@@ -3,6 +3,7 @@
         "appspot",
         "firebaseapp",
         "firestore",
-        "Lyoav"
+        "Lyoav",
+        "persistor"
     ]
 }
